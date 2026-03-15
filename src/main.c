@@ -4,6 +4,7 @@
 #include "fpu.h"
 #include "uart.h"
 #include "timebase.h"
+#include "adc.h"
 
 
 /* Modules to be developed
@@ -15,30 +16,25 @@
  */
 
 bool buttonState;
+uint32_t sensorValue;
 
 int main()
 {
     TimebaseInit();
     Fpu_enable();
     DebugUartInit();
+    AdcInit();
     LedsInit();
     ButtonInit();
 
+    AdcStartConversion();
+
     while (1)
     {
-        printf("Hello from STM32\n\r");
+       // printf("Hello from STM32\n\r");
         //delay(1);
         //TestingBoard();
-        
-        buttonState = GetButtonState();
+        sensorValue = AdcRead();
 
-        if (buttonState == true)
-        {
-            GreenLedOn();
-        }
-        else
-        {
-            GreenLedOff();
-        }
     }
 }
