@@ -8,14 +8,15 @@
 
 
 /* Modules to be developed
- * FPU
- * UART
- * Timebase
- * GPIO (BSP)
- * ADC
+ * FPU -- ok
+ * UART -- ok
+ * Timebase --ok
+ * GPIO (BSP) --ok
+ * ADC --ok
+ * SPI
+ * I2C
  */
 
-bool buttonState;
 uint32_t sensorValue;
 
 int main()
@@ -28,13 +29,15 @@ int main()
     ButtonInit();
 
     AdcStartConversion();
+    printf("Hello from STM32F4.....\n\r");
 
     while (1)
     {
-       // printf("Hello from STM32\n\r");
-        //delay(1);
-        //TestingBoard();
+       // printf("running4.....\r\n");
         sensorValue = AdcRead();
+        printf("%ld\r\n", sensorValue);
+        delay(1);
 
     }
 }
+

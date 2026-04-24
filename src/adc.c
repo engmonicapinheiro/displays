@@ -9,8 +9,8 @@ void AdcInit(void)
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
 
     /* set PA1 mode to analog mode */
-    GPIOA->MODER |= GPIO_MODER_MODER2_0;
-    GPIOA->MODER |= GPIO_MODER_MODER2_1;
+    GPIOA->MODER |= GPIO_MODER_MODER1_0;
+    GPIOA->MODER |= GPIO_MODER_MODER1_1;
 
     /*** configure the ADC module ***/
     /* enable clock access to the ADC module */
