@@ -22,7 +22,7 @@ void I2CInit(void)
     GPIOB->PUPDR |= GPIO_PUPDR_PUPD9_0,
     GPIOB->PUPDR &= ~(GPIO_PUPDR_PUPD9_1);
 
-    /* set PB8 and PB9 aternate function type to I2C1 (AF4) */
+    /* set PB8 and PB9 alternate function type to I2C1 (AF4) */
     GPIOB->AFR[1] |= (4U << GPIO_AFRH_AFSEL8_Pos);
     GPIOB->AFR[1] |= (4U << GPIO_AFRH_AFSEL9_Pos);
 
@@ -53,40 +53,42 @@ void I2cByteRead(char slaveAddress, char memAddress, char *data)
     volatile int temp;
 
     /* wait until the bus is not busy */
-    while(I2C1->SR2 & I2C_SR2_BUSY);
+    while(I2C1->SR2 & I2C_SR2_BUSY) {}
 
     /* generate start */
     I2C1->CR1 |= I2C_CR1_START;
 
     /* wait until start flag is set */
-    while (!(I2C1->CR1 & I2C_CR1_START));
+    while (!(I2C1->SR1 & I2C_SR1_SB)) {}
 
     /* transmit slave address + write */
     I2C1->DR = slaveAddress << 1;
 
     /* wait until address flag is set */
-    while (!(I2C1->SR1 & I2C_SR1_ADDR));
+    while (!(I2C1->SR1 & I2C_SR1_ADDR)) {}
 
     /* clear address flag */
     temp = I2C1->SR2;
 
     /* wait until transmitter is empty */
-    while (!(I2C1->SR1 & I2C_SR1_TXE));
+    while (!(I2C1->SR1 & I2C_SR1_TXE)) {}
 
     /* send memory address */
     I2C1->DR = memAddress;
+
+    while (!(I2C1->SR1 & I2C_SR1_BTF)) {}
 
     /* generate a restart */
     I2C1->CR1 |= I2C_CR1_START;
 
     /* wait until start flag is set */
-    while(!(I2C1->SR1 & I2C_SR1_SB));
+    while(!(I2C1->SR1 & I2C_SR1_SB)) {}
 
     /* transmit slave address + read */
     I2C1->DR = slaveAddress << 1 | 1;
 
     /* wait until start flag is set */
-    while (!(I2C1->SR1 & I2C_SR1_ADDR));
+    while (!(I2C1->SR1 & I2C_SR1_ADDR)) {}
 
     /* disable the acknowledge */
     I2C1->CR1 &= ~(I2C_CR1_ACK);
@@ -98,7 +100,7 @@ void I2cByteRead(char slaveAddress, char memAddress, char *data)
     I2C1->CR1 |= I2C_CR1_STOP;
 
     /* wait until RXNE flag is set */
-    while(!(I2C1->SR1 & I2C_SR1_RXNE));
+    while(!(I2C1->SR1 & I2C_SR1_RXNE)) {}
 
     /* read data from DR */
     *data++ = I2C1->DR;
@@ -109,46 +111,49 @@ void I2cBurstRead(char slaveAddress, char memAddress, char *data, int nrBytes)
     volatile int temp;
 
     /* wait until the bus is not busy */
-    while(I2C1->SR2 & I2C_SR2_BUSY);
+    while(I2C1->SR2 & I2C_SR2_BUSY) {}
 
     /* generate start */
     I2C1->CR1 |= I2C_CR1_START;
 
     /* wait until start flag is set */
-    while (!(I2C1->CR1 & I2C_CR1_START));
+    while (!(I2C1->SR1 & I2C_SR1_SB)) {}
 
     /* transmit slave address + write */
     I2C1->DR = slaveAddress << 1;
 
     /* wait until address flag is set */
-    while (!(I2C1->SR1 & I2C_SR1_ADDR));
+    while (!(I2C1->SR1 & I2C_SR1_ADDR)) {}
 
     /* clear address flag */
     temp = I2C1->SR2;
 
     /* wait until transmitter is empty */
-    while (!(I2C1->SR1 & I2C_SR1_TXE));
+    while (!(I2C1->SR1 & I2C_SR1_TXE)) {}
 
     /* send memory address */
     I2C1->DR = memAddress;
+
+    /* wait until register address byte is fully sent before repeated start */
+    while(!(I2C1->SR1 & I2C_SR1_BTF)) {}
 
     /* generate a restart */
     I2C1->CR1 |= I2C_CR1_START;
 
     /* wait until start flag is set */
-    while(!(I2C1->SR1 & I2C_SR1_SB));
+    while(!(I2C1->SR1 & I2C_SR1_SB)) {}
 
     /* transmit slave address + read */
     I2C1->DR = slaveAddress << 1 | 1;
 
     /* wait until start flag is set */
-    while (!(I2C1->SR1 & I2C_SR1_ADDR));
+    while (!(I2C1->SR1 & I2C_SR1_ADDR)) {}
+
+    /* enable acknowledge before clearing ADDR so ACK is sent for first byte */
+    I2C1->CR1 |= I2C_CR1_ACK;
 
     /* clear addr flag */
     temp = I2C1->SR2;
-
-    /* enable the acknowledge */
-    I2C1->CR1 |= (I2C_CR1_ACK);
 
     while(nrBytes > 0)
     {
@@ -161,7 +166,7 @@ void I2cBurstRead(char slaveAddress, char memAddress, char *data, int nrBytes)
             I2C1->CR1 |= I2C_CR1_STOP;
 
             /* wait until RXNE flag is set */
-            while(!(I2C1->SR1 & I2C_SR1_RXNE));
+            while(!(I2C1->SR1 & I2C_SR1_RXNE)) {}
 
             /* read data from DR */
             *data++ = I2C1->DR;
@@ -171,16 +176,14 @@ void I2cBurstRead(char slaveAddress, char memAddress, char *data, int nrBytes)
         else
         {
             /* wait until RXNE flag is set */
-            while(!(I2C1->SR1 & I2C_SR1_RXNE));
+            while(!(I2C1->SR1 & I2C_SR1_RXNE)) {}
 
             /* read data from DR */
             *data++ = I2C1->DR;
 
             nrBytes--;
         }
-
     }
-
 }
 
 
@@ -189,25 +192,25 @@ void I2cByteWrite(char slaveAddress, char memAddress, char *data)
     volatile int temp;
 
     /* wait until the bus is not busy */
-    while(I2C1->SR2 & I2C_SR2_BUSY);
+    while(I2C1->SR2 & I2C_SR2_BUSY){}
 
     /* generate start */
     I2C1->CR1 |= I2C_CR1_START;
 
     /* wait until start flag is set */
-    while (!(I2C1->CR1 & I2C_CR1_START));
+    while (!(I2C1->SR1 & I2C_SR1_SB)){}
 
     /* transmit slave address + write */
     I2C1->DR = slaveAddress << 1;
 
     /* wait until address flag is set */
-    while (!(I2C1->SR1 & I2C_SR1_ADDR));
+    while (!(I2C1->SR1 & I2C_SR1_ADDR)){}
 
     /* clear address flag */
     temp = I2C1->SR2;
 
     /* wait until transmitter is empty */
-    while (!(I2C1->SR1 & I2C_SR1_TXE));
+    while (!(I2C1->SR1 & I2C_SR1_TXE)){}
 
     /* send memory address */
     I2C1->DR = memAddress;
@@ -216,7 +219,7 @@ void I2cByteWrite(char slaveAddress, char memAddress, char *data)
     I2C1->DR = *data;
 
     /* wait until transfer is finished */
-    while(!(I2C1->SR1 & I2C_SR1_BTF));
+    while(!(I2C1->SR1 & I2C_SR1_BTF)){}
 
     /* generate stop after data is transmitted */
     I2C1->CR1 |= I2C_CR1_STOP;
@@ -227,25 +230,25 @@ void I2cBurstWrite(char slaveAddress, char memAddress, char *data, int nrBytes)
     volatile int temp;
 
     /* wait until the bus is not busy */
-    while(I2C1->SR2 & I2C_SR2_BUSY);
+    while(I2C1->SR2 & I2C_SR2_BUSY) {}
 
     /* generate start */
     I2C1->CR1 |= I2C_CR1_START;
 
     /* wait until start flag is set */
-    while (!(I2C1->CR1 & I2C_CR1_START));
+    while (!(I2C1->SR1 & I2C_SR1_SB)){}
 
     /* transmit slave address + write */
     I2C1->DR = slaveAddress << 1;
 
     /* wait until address flag is set */
-    while (!(I2C1->SR1 & I2C_SR1_ADDR));
+    while (!(I2C1->SR1 & I2C_SR1_ADDR)){}
 
     /* clear address flag */
     temp = I2C1->SR2;
 
     /* wait until transmitter is empty */
-    while (!(I2C1->SR1 & I2C_SR1_TXE));
+    while (!(I2C1->SR1 & I2C_SR1_TXE)){}
 
     /* send memory address */
     I2C1->DR = memAddress;
@@ -253,14 +256,14 @@ void I2cBurstWrite(char slaveAddress, char memAddress, char *data, int nrBytes)
     for(int i = 0; i < nrBytes; ++i)
     {
         /* wait until transmitter is empty */
-        while (!(I2C1->SR1 & I2C_SR1_TXE));
+        while (!(I2C1->SR1 & I2C_SR1_TXE)){}
 
         /* transmit the data */
         I2C1->DR  = *data++;
     }
 
     /* wait until transfer is finished */
-    while(!(I2C1->SR1 & I2C_SR1_BTF));
+    while(!(I2C1->SR1 & I2C_SR1_BTF)){}
 
     /* generate stop after data is transmitted */
     I2C1->CR1 |= I2C_CR1_STOP;
