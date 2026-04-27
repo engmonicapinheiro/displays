@@ -1,9 +1,11 @@
-#ifndef __TIMEBASE_H
-#define __TIMEBASE_H
+#ifndef __TIMEBASE_H__
+#define __TIMEBASE_H__
 
 #include <stdint.h>
 
 #define ONE_SECOND_LOAD     16000000
+#define ONE_MS_SECOND_LOAD  16000
+
 #define TICK_FREQUENCY      1
 #define MAX_DELAY           0xFFFFFFFF
 
@@ -11,6 +13,7 @@ volatile uint32_t g_currentTick;
 volatile uint32_t g_currentTick_previous;
 
 void TimebaseInit(void);
+void TimebaseMsInit(void);
 void TickIncrement(void);
 uint32_t GetTick(void);
 void delay(uint32_t delay);
