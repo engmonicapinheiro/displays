@@ -17,90 +17,95 @@ const uint16_t digitSegments[10] = {
  };
 
 
-void SevenSegWrite(uint8_t digit, uint8_t value)
+void SevenSegWrite(uint8_t digit, uint8_t value, uint8_t dp)
 {
     uint8_t seg = digitSegments[value % 10];
 
+    if (dp)
+    {
+        seg |= SEGMENT_DP;
+    }
+
     /* Digit select — deactivate both, then activate the requested one */
-    GPIOE->BSRR = (GPIO_ODR_ODR_11 | GPIO_ODR_ODR_13) << 16;  // reset both
-    GPIOE->BSRR = (digit == 1) ? GPIO_ODR_ODR_11 : GPIO_ODR_ODR_13;
+    GPIOE->BSRR = (GPIO_BSRR_BR_11 | GPIO_BSRR_BR_13);
+    GPIOE->BSRR = (digit == 1) ? GPIO_BSRR_BS_11 : GPIO_BSRR_BS_13;
 
     /* GPIOE: A -> PE15 */
     if (seg & SEGMENT_A)
     {
-        GPIOE->BSRR =  GPIO_ODR_ODR_15;
+        GPIOE->BSRR = GPIO_BSRR_BS_15;
     }
     else
     {
-        GPIOE->BSRR = (GPIO_ODR_ODR_15 << 16);
+        GPIOE->BSRR = GPIO_BSRR_BR_15;
     }
 
-    /* GPIOB: B -> PB11, c -> PB13, d -> PB15 */
+    /* GPIOB: B -> PB11, C -> PB13, D -> PB15 */
     if (seg & SEGMENT_B)
     {
-        GPIOB->BSRR =  GPIO_ODR_ODR_11;
+        GPIOB->BSRR = GPIO_BSRR_BS_11;
     }
     else
     {
-        GPIOB->BSRR = (GPIO_ODR_ODR_11 << 16);
+        GPIOB->BSRR = GPIO_BSRR_BR_11;
     }
 
     if (seg & SEGMENT_C)
     {
-        GPIOB->BSRR =  GPIO_ODR_ODR_13;
+        GPIOB->BSRR = GPIO_BSRR_BS_13;
     }
     else
     {
-        GPIOB->BSRR = (GPIO_ODR_ODR_13 << 16);
+        GPIOB->BSRR = GPIO_BSRR_BR_13;
     }
 
     if (seg & SEGMENT_D)
     {
-        GPIOB->BSRR =  GPIO_ODR_ODR_15;
+        GPIOB->BSRR = GPIO_BSRR_BS_15;
     }
     else
     {
-        GPIOB->BSRR = (GPIO_ODR_ODR_15 << 16);
+        GPIOB->BSRR = GPIO_BSRR_BR_15;
     }
 
-    /* GPIOD: e -> PD9, f -> PD11, g -> PD13, DP -> PD15 */
+    /* GPIOD: E -> PD9, F -> PD11, G -> PD13, DP -> PD15 */
     if (seg & SEGMENT_E)
     {
-        GPIOD->BSRR =  GPIO_ODR_ODR_9;
-
+        GPIOD->BSRR = GPIO_BSRR_BS_9;
     }
     else
     {
-        GPIOD->BSRR = (GPIO_ODR_ODR_9  << 16);
+        GPIOD->BSRR = GPIO_BSRR_BR_9;
     }
 
     if (seg & SEGMENT_F)
     {
-        GPIOD->BSRR =  GPIO_ODR_ODR_11;
+        GPIOD->BSRR = GPIO_BSRR_BS_11;
     }
     else
     {
-        GPIOD->BSRR = (GPIO_ODR_ODR_11 << 16);
+        GPIOD->BSRR = GPIO_BSRR_BR_11;
     }
 
     if (seg & SEGMENT_G)
     {
-        GPIOD->BSRR =  GPIO_ODR_ODR_13;
+        GPIOD->BSRR = GPIO_BSRR_BS_13;
     }
     else
     {
-        GPIOD->BSRR = (GPIO_ODR_ODR_13 << 16);
+        GPIOD->BSRR = GPIO_BSRR_BR_13;
     }
 
     if (seg & SEGMENT_DP)
     {
-        GPIOD->BSRR =  GPIO_ODR_ODR_15;
+        GPIOD->BSRR = GPIO_BSRR_BS_15;
     }
     else
     {
-        GPIOD->BSRR = (GPIO_ODR_ODR_15 << 16);
+        GPIOD->BSRR = GPIO_BSRR_BR_15;
     }
 }
+
 
 
 

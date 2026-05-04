@@ -34,7 +34,7 @@ void WriteNumberSix(void);
 void WriteNumberSeven(void);
 void WriteNumberEight(void);void WriteNumberNine(void);
 
-void SevenSegWrite(uint8_t digit, uint8_t value);
+void SevenSegWrite(uint8_t digit, uint8_t value, uint8_t dp);
 
 
 #endif //SEVENSEG_H
