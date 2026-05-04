@@ -36,24 +36,16 @@ int main()
 
     while (1)
     {
-        WriteNumberOne();
+
+        SevenSegWrite(1, 1);  // digit 1 (PE11) shows '1'
         delay(500);
-        WriteNumberTwo();
+        SevenSegWrite(2, 9);  // digit 2 (PE13) shows '9'
         delay(500);
-        WriteNumberThree();
+        SevenSegWrite(1, 4);  // digit 1 (PE11) shows '4'
         delay(500);
-        WriteNumberFour();
+        SevenSegWrite(2, 0);  // digit 2 (PE13) shows '0'
         delay(500);
-        WriteNumberFive();
-        delay(500);
-        WriteNumberSix();
-        delay(500);
-        WriteNumberSeven();
-        delay(500);
-        WriteNumberEight();
-        delay(500);
-        WriteNumberNine();
-        delay(500);
+
     }
 }
 

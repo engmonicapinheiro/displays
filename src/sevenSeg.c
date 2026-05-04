@@ -1,5 +1,108 @@
 #include "sevenSeg.h"
 #include "stm32f4xx.h"
+#include <stdint.h>
+
+/* creating the lookup table */
+const uint16_t digitSegments[10] = {
+    (SEGMENT_A | SEGMENT_B | SEGMENT_C | SEGMENT_D | SEGMENT_E | SEGMENT_F),   //0
+    (SEGMENT_B | SEGMENT_C),   //1
+    (SEGMENT_A | SEGMENT_B | SEGMENT_D | SEGMENT_E | SEGMENT_G),  //2
+    (SEGMENT_A | SEGMENT_B | SEGMENT_C | SEGMENT_D | SEGMENT_G),  //3
+    (SEGMENT_B | SEGMENT_C | SEGMENT_F | SEGMENT_G),  //4
+    (SEGMENT_A | SEGMENT_C | SEGMENT_D | SEGMENT_F | SEGMENT_G),   //5
+    (SEGMENT_A | SEGMENT_C | SEGMENT_D | SEGMENT_E | SEGMENT_F | SEGMENT_G),   //6
+    (SEGMENT_A | SEGMENT_B | SEGMENT_C),   //7
+    (SEGMENT_A | SEGMENT_B | SEGMENT_C | SEGMENT_D | SEGMENT_E | SEGMENT_F | SEGMENT_G), //8
+    (SEGMENT_A | SEGMENT_B | SEGMENT_C | SEGMENT_D | SEGMENT_F | SEGMENT_G)   //9
+ };
+
+
+void SevenSegWrite(uint8_t digit, uint8_t value)
+{
+    uint8_t seg = digitSegments[value % 10];
+
+    /* Digit select — deactivate both, then activate the requested one */
+    GPIOE->BSRR = (GPIO_ODR_ODR_11 | GPIO_ODR_ODR_13) << 16;  // reset both
+    GPIOE->BSRR = (digit == 1) ? GPIO_ODR_ODR_11 : GPIO_ODR_ODR_13;
+
+    /* GPIOE: A -> PE15 */
+    if (seg & SEGMENT_A)
+    {
+        GPIOE->BSRR =  GPIO_ODR_ODR_15;
+    }
+    else
+    {
+        GPIOE->BSRR = (GPIO_ODR_ODR_15 << 16);
+    }
+
+    /* GPIOB: B -> PB11, c -> PB13, d -> PB15 */
+    if (seg & SEGMENT_B)
+    {
+        GPIOB->BSRR =  GPIO_ODR_ODR_11;
+    }
+    else
+    {
+        GPIOB->BSRR = (GPIO_ODR_ODR_11 << 16);
+    }
+
+    if (seg & SEGMENT_C)
+    {
+        GPIOB->BSRR =  GPIO_ODR_ODR_13;
+    }
+    else
+    {
+        GPIOB->BSRR = (GPIO_ODR_ODR_13 << 16);
+    }
+
+    if (seg & SEGMENT_D)
+    {
+        GPIOB->BSRR =  GPIO_ODR_ODR_15;
+    }
+    else
+    {
+        GPIOB->BSRR = (GPIO_ODR_ODR_15 << 16);
+    }
+
+    /* GPIOD: e -> PD9, f -> PD11, g -> PD13, DP -> PD15 */
+    if (seg & SEGMENT_E)
+    {
+        GPIOD->BSRR =  GPIO_ODR_ODR_9;
+
+    }
+    else
+    {
+        GPIOD->BSRR = (GPIO_ODR_ODR_9  << 16);
+    }
+
+    if (seg & SEGMENT_F)
+    {
+        GPIOD->BSRR =  GPIO_ODR_ODR_11;
+    }
+    else
+    {
+        GPIOD->BSRR = (GPIO_ODR_ODR_11 << 16);
+    }
+
+    if (seg & SEGMENT_G)
+    {
+        GPIOD->BSRR =  GPIO_ODR_ODR_13;
+    }
+    else
+    {
+        GPIOD->BSRR = (GPIO_ODR_ODR_13 << 16);
+    }
+
+    if (seg & SEGMENT_DP)
+    {
+        GPIOD->BSRR =  GPIO_ODR_ODR_15;
+    }
+    else
+    {
+        GPIOD->BSRR = (GPIO_ODR_ODR_15 << 16);
+    }
+}
+
+
 
 
 void SevenSegInit(void)
