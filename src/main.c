@@ -37,18 +37,15 @@ int main()
     /* initialise the 7/8 segment display */
     SevenSegInit();
 
-    AdcStartConversion();
+    //AdcStartConversion();
+    Timer2OutputCompare();
+
 
     printf("Hello from STM32F4.....\n\r");
 
     while (1)
     {
-        /* wait for UIF */
-        while(!(TIM2->SR & TIM_SR_UIF));
-        /* clear UIF */
-        TIM2->SR &= ~TIM_SR_UIF;
 
-        printf("A second passed! \n\r");
     }
 }
 
