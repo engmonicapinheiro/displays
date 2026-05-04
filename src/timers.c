@@ -53,3 +53,36 @@ void Timer2OutputCompare(void)
     /* enable the timer */
     TIM2->CR1 |= TIM_CR1_CEN;
 }
+
+//PA6 will capture the frequency from PA5
+void Timer3InputCapture(void)
+{
+    /* Enable clock access to GPIOA */
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+
+    /* set PA6 to alternate function mode */
+    GPIOA->MODER &= ~(GPIO_MODER_MODER6_0);
+    GPIOA->MODER |= GPIO_MODER_MODER6_1;
+
+    /* set PA6 alternate function type to TIM3_CH1 (AF2) */
+    GPIOA->AFR[0] |= GPIO_AFRL_AFSEL6_1;
+
+    /* enable clock access to TIM3 */
+    RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
+
+    /* set the prescaler value */
+    TIM3->PSC = 16000 - 1;  //16MHZ/1600 = 10.000
+
+    /* set CH1 to input capture */
+    TIM3->CCMR1 |= TIM_CCMR1_CC1S_0;
+
+    /* set CH1 to capture at rising edge */
+    TIM3->CCER |= TIM_CCER_CC1E;      // Enable capture
+    TIM3->CCER &= ~TIM_CCER_CC1P;     // Rising edge detection
+
+    /* Enable capture interrupt */
+    TIM3->DIER |= TIM_DIER_CC1IE;
+
+    /* enable the timer */
+    TIM3->CR1 |= TIM_CR1_CEN;
+}
