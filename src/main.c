@@ -1,12 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "stm32f407xx.h"
 #include "gpio.h"
 #include "fpu.h"
 #include "uart.h"
 #include "timebase.h"
 #include "adc.h"
-#include "adxl345.h"
+#include "timers.h"
 #include "sevenSeg.h"
+#include "adxl345.h"
+
 
 /* Modules to be developed
  * FPU -- ok
@@ -14,6 +17,7 @@
  * Timebase --ok
  * GPIO (BSP) --ok
  * ADC --ok
+ * timers
  * SPI
  * I2C --ok
  */
@@ -25,6 +29,7 @@ int main()
     TimebaseMsInit();
     Fpu_enable();
     DebugUartInit();
+    Timer1HzInit();
     AdcInit();
     LedsInit();
     ButtonInit();
@@ -32,20 +37,18 @@ int main()
     /* initialise the 7/8 segment display */
     SevenSegInit();
 
+    AdcStartConversion();
+
     printf("Hello from STM32F4.....\n\r");
 
     while (1)
     {
+        /* wait for UIF */
+        while(!(TIM2->SR & TIM_SR_UIF));
+        /* clear UIF */
+        TIM2->SR &= ~TIM_SR_UIF;
 
-        SevenSegWrite(1, 1,1);  // digit 1 (PE11) shows '1'
-        delay(500);
-        SevenSegWrite(2, 9, 0);  // digit 2 (PE13) shows '9'
-        delay(500);
-        SevenSegWrite(1, 4, 0);  // digit 1 (PE11) shows '4'
-        delay(500);
-        SevenSegWrite(2, 0, 1);  // digit 2 (PE13) shows '0'
-        delay(500);
-
+        printf("A second passed! \n\r");
     }
 }
 
