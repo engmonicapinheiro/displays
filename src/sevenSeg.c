@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 /* creating the lookup table */
-const uint16_t digitSegments[10] = {
+const uint8_t digitSegments[10] = {
     (SEGMENT_A | SEGMENT_B | SEGMENT_C | SEGMENT_D | SEGMENT_E | SEGMENT_F),   //0
     (SEGMENT_B | SEGMENT_C),   //1
     (SEGMENT_A | SEGMENT_B | SEGMENT_D | SEGMENT_E | SEGMENT_G),  //2
@@ -28,7 +28,7 @@ void SevenSegWrite(uint8_t digit, uint8_t value, uint8_t dp)
 
     /* Digit select — deactivate both, then activate the requested one */
     GPIOE->BSRR = (GPIO_BSRR_BR_11 | GPIO_BSRR_BR_13);
-    GPIOE->BSRR = (digit == 1) ? GPIO_BSRR_BS_11 : GPIO_BSRR_BS_13;
+    //GPIOE->BSRR = (digit == 1) ? GPIO_BSRR_BS_11 : GPIO_BSRR_BS_13;
 
     /* GPIOE: A -> PE15 */
     if (seg & SEGMENT_A)
@@ -104,11 +104,67 @@ void SevenSegWrite(uint8_t digit, uint8_t value, uint8_t dp)
     {
         GPIOD->BSRR = GPIO_BSRR_BR_15;
     }
+
+    /* ENABLE: Finally, turn on the specific transistor for this digit */
+    if (digit == 1)
+    {
+        GPIOE->BSRR = GPIO_BSRR_BS_11;
+    }
+    else
+    {
+        GPIOE->BSRR = GPIO_BSRR_BS_13;
+    }
 }
 
 
 
-
+// void SevenSegWrite(uint8_t digit, uint8_t value, uint8_t dp)
+// {
+//     uint8_t seg = (uint8_t)digitSegments[value % 10];
+//
+//     if (dp) seg |= SEGMENT_DP;
+//
+//     /* build BSRR words for each port — upper 16 bits = reset, lower 16 bits = set */
+//     uint32_t bsrr_e = 0, bsrr_b = 0, bsrr_d = 0;
+//
+//     /* GPIOE: A -> PE15 */
+//     if (seg & SEGMENT_A) bsrr_e |= GPIO_BSRR_BS_15;
+//     else                 bsrr_e |= GPIO_BSRR_BR_15;
+//
+//     /* GPIOB: B -> PB11, C -> PB13, D -> PB15 */
+//     if (seg & SEGMENT_B) bsrr_b |= GPIO_BSRR_BS_11;
+//     else                 bsrr_b |= GPIO_BSRR_BR_11;
+//
+//     if (seg & SEGMENT_C) bsrr_b |= GPIO_BSRR_BS_13;
+//     else                 bsrr_b |= GPIO_BSRR_BR_13;
+//
+//     if (seg & SEGMENT_D) bsrr_b |= GPIO_BSRR_BS_15;
+//     else                 bsrr_b |= GPIO_BSRR_BR_15;
+//
+//     /* GPIOD: E -> PD9, F -> PD11, G -> PD13, DP -> PD15 */
+//     if (seg & SEGMENT_E) bsrr_d |= GPIO_BSRR_BS_9;
+//     else                 bsrr_d |= GPIO_BSRR_BR_9;
+//
+//     if (seg & SEGMENT_F) bsrr_d |= GPIO_BSRR_BS_11;
+//     else                 bsrr_d |= GPIO_BSRR_BR_11;
+//
+//     if (seg & SEGMENT_G) bsrr_d |= GPIO_BSRR_BS_13;
+//     else                 bsrr_d |= GPIO_BSRR_BR_13;
+//
+//     if (seg & SEGMENT_DP) bsrr_d |= GPIO_BSRR_BS_15;
+//     else                  bsrr_d |= GPIO_BSRR_BR_15;
+//
+//     /* 1. blank both digits */
+//     GPIOE->BSRR = (GPIO_BSRR_BR_11 | GPIO_BSRR_BR_13);
+//
+//     /* 2. write all segments in 3 register writes — minimum blanking time */
+//     GPIOE->BSRR = bsrr_e;
+//     GPIOB->BSRR = bsrr_b;
+//     GPIOD->BSRR = bsrr_d;
+//
+//     /* 3. enable digit */
+//     GPIOE->BSRR = (digit == 1) ? GPIO_BSRR_BS_11 : GPIO_BSRR_BS_13;
+// }
 
 void SevenSegInit(void)
 {

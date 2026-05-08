@@ -22,6 +22,9 @@ void AdcInit(void)
     /* set the conversion sequence length */
     ADC1->SQR1 = 0x00;
 
+    /* set sampling time for channel 1 to 480 cycles (maximum, most stable) */
+    ADC1->SMPR2 |= (ADC_SMPR2_SMP1_0 | ADC_SMPR2_SMP1_1 | ADC_SMPR2_SMP1_2);
+
     /* enable the ADC module */
     ADC1->CR2 |= ADC_CR2_ADON;
 }

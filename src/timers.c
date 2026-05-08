@@ -1,9 +1,12 @@
 #include "timers.h"
 #include "stm32f407xx.h"
-#include <stdio.h>
+#include "sevenSeg.h"
 
 
 static void tim2Callback(void);
+
+static volatile uint8_t tens = 0;
+static volatile uint8_t ones = 0;
 
 void Timer1HzInit(void)
 {
@@ -11,10 +14,10 @@ void Timer1HzInit(void)
     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
 
     /* set the prescaler value */
-    TIM2->PSC = 1600 - 1;  //16MHZ/1600 = 10.000
+    TIM2->PSC = 16000 - 1;  //16MHZ/1600 = 10.000
 
     /* set the auto-reload value */
-    TIM2->ARR = 10000 - 1;   //10000/1000 = 1Hz
+    TIM2->ARR = 10 - 1;   //10000/1000 = 1Hz
 
     /* clear the counter */
     TIM2->CNT = 0;
@@ -29,10 +32,10 @@ void Timer1HzInterruptInit(void)
     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
 
     /* set the prescaler value */
-    TIM2->PSC = 1600 - 1;  //16MHZ/1600 = 10.000
+    TIM2->PSC = 160 - 1;  //16MHZ/1600 = 10.000
 
     /* set the auto-reload value */
-    TIM2->ARR = 10000 - 1;   //10000/1000 = 1Hz
+    TIM2->ARR = 500 - 1;   //20000/1000 = 2Hz
 
     /* clear the counter */
     TIM2->CNT = 0;
@@ -59,7 +62,29 @@ void TIM2_IRQHandler(void)
 
 static void tim2Callback(void)
 {
-    printf("a second passed...\n\r");
+    static uint8_t current_digit = 1;
+
+    /* blank both before switching */
+    //GPIOE->BSRR = (GPIO_BSRR_BR_11 | GPIO_BSRR_BR_13);
+
+    if (current_digit == 1)
+    {
+        SevenSegWrite(1, tens, 0);
+        current_digit = 2;
+    }
+    else
+    {
+        SevenSegWrite(2, ones, 0);
+        current_digit = 1;
+    }
+}
+
+void SevenSegSetValue(uint8_t t, uint8_t o)
+{
+    NVIC_DisableIRQ(TIM2_IRQn);
+    tens = t;
+    ones = o;
+    NVIC_EnableIRQ(TIM2_IRQn);
 }
 
 /** Output compare: toggling a pin periodically using the timer */
