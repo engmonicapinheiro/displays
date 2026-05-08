@@ -33,6 +33,7 @@ int main()
     Fpu_enable();
     DebugUartInit();
     LedsInit();
+    Timer1HzInterruptInit();
    // Timer1HzInit();
    // AdcInit();
    // ButtonInit();

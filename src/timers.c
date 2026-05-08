@@ -1,5 +1,9 @@
 #include "timers.h"
 #include "stm32f407xx.h"
+#include <stdio.h>
+
+
+static void tim2Callback(void);
 
 void Timer1HzInit(void)
 {
@@ -17,6 +21,45 @@ void Timer1HzInit(void)
 
     /* enable the timer */
     TIM2->CR1 |= TIM_CR1_CEN;
+}
+
+void Timer1HzInterruptInit(void)
+{
+    /* enable clock access to TIM2 */
+    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+
+    /* set the prescaler value */
+    TIM2->PSC = 1600 - 1;  //16MHZ/1600 = 10.000
+
+    /* set the auto-reload value */
+    TIM2->ARR = 10000 - 1;   //10000/1000 = 1Hz
+
+    /* clear the counter */
+    TIM2->CNT = 0;
+
+    /* enable the timer */
+    TIM2->CR1 |= TIM_CR1_CEN;
+
+    /* enable TIM interrupt */
+    TIM2->DIER |= TIM_DIER_UIE;
+
+    /* enable TIM interrupt in NVIC */
+    NVIC_EnableIRQ(TIM2_IRQn);
+}
+
+void TIM2_IRQHandler(void)
+{
+    /* clear update interrupt flag */
+    TIM2->SR &= ~TIM_SR_UIF;
+
+    /* do something */
+    tim2Callback();
+
+}
+
+static void tim2Callback(void)
+{
+    printf("a second passed...\n\r");
 }
 
 /** Output compare: toggling a pin periodically using the timer */

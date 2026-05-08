@@ -4,6 +4,6 @@
 void Timer1HzInit(void);
 void Timer2OutputCompare(void);
 void Timer3InputCapture(void);
-
+void Timer1HzInterruptInit(void);
 
 #endif //TIMERS_H
