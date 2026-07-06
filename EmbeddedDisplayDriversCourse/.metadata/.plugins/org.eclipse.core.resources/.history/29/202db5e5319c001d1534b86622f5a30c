@@ -1,0 +1,26 @@
+#ifndef __ST7735_H__
+#define __ST7735_H__
+
+#include <stdint.h>
+#include "stm32f4xx.h"
+#include "spi.h"
+
+
+#define RES_PIN		(1U<<5)
+#define DC_PIN		(1U<<4)
+#define CS_PIN		(1U<<3)
+
+#define	ST7735_RES1		(GPIOB->ODR |=RES_PIN)
+#define	ST7735_RES0		(GPIOB->ODR &=~RES_PIN)
+
+#define	ST7735_DC1		(GPIOB->ODR |=DC_PIN)
+#define	ST7735_DC0		(GPIOB->ODR &=~DC_PIN)
+
+#define	ST7735_CS1		(GPIOB->ODR |=CS_PIN)
+#define	ST7735_CS0		(GPIOB->ODR &=~CS_PIN)
+
+
+#define ST7735_WIDTH		128
+#define ST7735_HEIGHT		160
+
+#endif

@@ -1,0 +1,7 @@
+timebase.c:25:6:sys_clck_config_80mhz	16	static
+timebase.c:80:6:delay	24	static
+timebase.c:94:10:get_tick	4	static,ignoring_inline_asm
+timebase.c:103:13:tick_increment	4	static
+timebase.c:107:6:timebase_init	4	static,ignoring_inline_asm
+timebase.c:132:6:timebase_msec_init	4	static,ignoring_inline_asm
+timebase.c:158:6:SysTick_Handler	8	static

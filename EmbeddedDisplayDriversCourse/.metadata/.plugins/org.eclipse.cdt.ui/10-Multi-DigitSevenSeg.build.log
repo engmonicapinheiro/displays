@@ -1,0 +1,10 @@
+11:14:01 **** Incremental Build of configuration Debug for project 10-Multi-DigitSevenSeg ****
+make -j8 all 
+arm-none-eabi-size   10-Multi-DigitSevenSeg.elf 
+   text	   data	    bss	    dec	    hex	filename
+   2776	      8	   1640	   4424	   1148	10-Multi-DigitSevenSeg.elf
+Finished building: default.size.stdout
+ 
+
+11:14:01 Build Finished. 0 errors, 0 warnings. (took 425ms)
+

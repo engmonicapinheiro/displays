@@ -1,0 +1,26 @@
+11:14:10 **** Build of configuration Debug for project 4_system_drivers-gpio ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/bsp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/bsp.d" -MT"Src/bsp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/bsp.o"
+arm-none-eabi-gcc "../Src/fpu.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/fpu.d" -MT"Src/fpu.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/fpu.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/sysmem.o"
+arm-none-eabi-gcc "../Src/timebase.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/timebase.d" -MT"Src/timebase.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/timebase.o"
+arm-none-eabi-gcc "../Src/uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/4_system_drivers-gpio/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/uart.d" -MT"Src/uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/uart.o"
+arm-none-eabi-gcc -o "4_system_drivers-gpio.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Gaming Laptop RTX\Documents\EmbeddedDisplayDriversCourse\4_system_drivers-gpio\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="4_system_drivers-gpio.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 4_system_drivers-gpio.elf
+ 
+arm-none-eabi-objdump -h -S  4_system_drivers-gpio.elf  > "4_system_drivers-gpio.list"
+arm-none-eabi-objcopy  -O binary  4_system_drivers-gpio.elf  "4_system_drivers-gpio.bin"
+arm-none-eabi-size   4_system_drivers-gpio.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1276	      8	   1576	   2860	    b2c	4_system_drivers-gpio.elf
+Finished building: default.size.stdout
+ 
+Finished building: 4_system_drivers-gpio.bin
+ 
+Finished building: 4_system_drivers-gpio.list
+ 
+
+11:14:11 Build Finished. 0 errors, 0 warnings. (took 1s.699ms)
+

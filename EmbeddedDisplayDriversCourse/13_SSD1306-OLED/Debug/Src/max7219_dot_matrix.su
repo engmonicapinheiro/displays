@@ -1,0 +1,13 @@
+max7219_dot_matrix.c:204:6:max7219_dot_mat_init	16	static
+max7219_dot_matrix.c:227:6:max7219_gpio_init	4	static
+max7219_dot_matrix.c:242:6:max7219_write_byte	24	static
+max7219_dot_matrix.c:268:6:max7219_write_cmd	24	static
+max7219_dot_matrix.c:289:6:max7219_set_led	24	static
+max7219_dot_matrix.c:323:6:max7219_set_row	32	static
+max7219_dot_matrix.c:354:6:max2719_write_char	32	static
+max7219_dot_matrix.c:367:6:max7219_scroll_char	48	static
+max7219_dot_matrix.c:408:6:max7219_dot_matrix_clear	16	static
+max7219_dot_matrix.c:421:6:max7219_scroll_str	24	static
+max7219_dot_matrix.c:429:6:max7219_shift_char	32	static
+max7219_dot_matrix.c:459:6:max7219_left_shift	24	static
+max7219_dot_matrix.c:476:6:max7219_right_shift	24	static

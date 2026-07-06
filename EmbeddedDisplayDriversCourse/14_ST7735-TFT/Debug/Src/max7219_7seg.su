@@ -1,0 +1,7 @@
+max7219_7seg.c:22:6:max7219_init	16	static
+max7219_7seg.c:68:13:max7219_spi_init	8	static
+max7219_7seg.c:88:6:max7219_write_number	24	static
+max7219_7seg.c:103:6:max7219_clear	16	static
+max7219_7seg.c:111:13:cs_pin_init	4	static
+max7219_7seg.c:119:13:cs_enable	4	static
+max7219_7seg.c:124:13:cs_disable	4	static

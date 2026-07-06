@@ -1,0 +1,10 @@
+11:14:19 **** Incremental Build of configuration Debug for project 9_Seven-seg-LookUp ****
+make -j8 all 
+arm-none-eabi-size   9_Seven-seg-LookUp.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1324	      8	   1576	   2908	    b5c	9_Seven-seg-LookUp.elf
+Finished building: default.size.stdout
+ 
+
+11:14:19 Build Finished. 0 errors, 0 warnings. (took 388ms)
+

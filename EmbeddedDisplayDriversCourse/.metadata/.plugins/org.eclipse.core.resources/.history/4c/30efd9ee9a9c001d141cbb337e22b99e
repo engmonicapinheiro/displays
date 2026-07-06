@@ -1,0 +1,15 @@
+ssd1306.c:146:6:ssd1306_scroll_right	16	static
+ssd1306.c:158:6:ssd1306_scroll_left	16	static
+ssd1306.c:170:6:ssd1306_stop_scroll	8	static
+ssd1306.c:175:6:ssd1306_invert_display	16	static
+ssd1306.c:188:9:ssd1306_init	16	static
+ssd1306.c:241:13:ssd1306_i2c_write_multi	16	static
+ssd1306.c:246:6:ssd1306_fill	16	static
+ssd1306.c:252:6:ssd1306_update_screen	16	static
+ssd1306.c:266:6:ssd1306_draw_bmp	32	static
+ssd1306.c:306:6:ssd1306_draw_pixel	16	static
+ssd1306.c:333:6:ssd1306_goto_xy	16	static
+ssd1306.c:340:6:ssd1306_put_ch	32	static
+ssd1306.c:377:6:ssd1306_put_str	16	static
+ssd1306.c:423:6:ssd1306_draw_line	40	static
+ssd1306.c:517:6:ssd1306_clear	8	static

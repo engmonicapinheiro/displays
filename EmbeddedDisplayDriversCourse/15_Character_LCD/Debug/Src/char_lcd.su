@@ -1,0 +1,7 @@
+char_lcd.c:31:6:lcd_init	8	static
+char_lcd.c:46:6:lcd_set_cursor_pos	24	static
+char_lcd.c:62:6:lcd_gpio_init	4	static
+char_lcd.c:81:13:lcd_nibble_write	16	static
+char_lcd.c:110:6:lcd_cmd	16	static
+char_lcd.c:131:6:lcd_write	16	static
+char_lcd.c:141:6:lcd_data	16	static

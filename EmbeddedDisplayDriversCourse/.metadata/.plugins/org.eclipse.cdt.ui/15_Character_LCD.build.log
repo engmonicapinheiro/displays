@@ -1,0 +1,10 @@
+11:33:22 **** Incremental Build of configuration Debug for project 15_Character_LCD ****
+make -j8 all 
+arm-none-eabi-size   15_Character_LCD.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4732	    108	   3484	   8324	   2084	15_Character_LCD.elf
+Finished building: default.size.stdout
+ 
+
+11:33:23 Build Finished. 0 errors, 0 warnings. (took 529ms)
+

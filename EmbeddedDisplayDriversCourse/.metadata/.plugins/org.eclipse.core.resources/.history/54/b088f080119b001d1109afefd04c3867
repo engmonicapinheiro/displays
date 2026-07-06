@@ -1,0 +1,55 @@
+#include "st7735.h"
+
+
+/*STM32F4			ST7735
+ * PA5(SCK)	  :     SCK
+ * PA7(MOSI)  :     SDA
+ * PB5		  :     RS(RES)
+ * PB4		  :     DC
+ * PB3		  :     CS 		*/
+
+
+
+#define GPIOBEN			(1U<<1)
+
+SPI_HandleTypeDef hspi1;
+
+void st7735_gpio_init(void)
+{
+	/*Enable clock access to GPIO*/
+	RCC->AHB1ENR |=GPIOBEN;
+
+	/*Set PB3,PB4 and PB5 as output pins*/
+
+	GPIOB->MODER |=(1U<<6);
+	GPIOB->MODER &=~(1U<<7);
+
+	GPIOB->MODER |=(1U<<8);
+	GPIOB->MODER &=~(1U<<9);
+
+	GPIOB->MODER |=(1U<<10);
+	GPIOB->MODER &=~(1U<<11);
+}
+
+void st7735_spi_init(void)
+{
+	/*Initialize st7735 gpio*/
+	st7735_gpio_init();
+
+	/*Set spi configuration parameters*/
+	hspi1.Instance = SPI1;
+	hspi1.Init.Mode = SPI_MODE_MASTER;
+	hspi1.Init.Direction =  SPI_DIRECTION_1LINE;
+	hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+	hspi1.Init.CLKPolarity =  SPI_POLARITY_LOW;
+	hspi1.Init.CLKPhase =  SPI_PHASE_1EDGE;
+	hspi1.Init.NSS =  SPI_NSS_SOFT;
+	hspi1.Init.BuadRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+	hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+	hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+
+
+	/*Initialize spi*/
+	spi_init(&hspi1);
+
+}

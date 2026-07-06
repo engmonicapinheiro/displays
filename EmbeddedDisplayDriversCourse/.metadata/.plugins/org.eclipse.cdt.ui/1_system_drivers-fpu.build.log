@@ -1,0 +1,23 @@
+11:14:04 **** Build of configuration Debug for project 1_system_drivers-fpu ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/1_system_drivers-fpu/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/1_system_drivers-fpu/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/1_system_drivers-fpu/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/1_system_drivers-fpu/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/1_system_drivers-fpu/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/1_system_drivers-fpu/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/sysmem.o"
+arm-none-eabi-gcc "../Src/fpu.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -DSTM32F411xE -c -I../Inc -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/1_system_drivers-fpu/chip_headers/CMSIS/Include" -I"C:/Users/Gaming Laptop RTX/Documents/EmbeddedDisplayDriversCourse/1_system_drivers-fpu/chip_headers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/fpu.d" -MT"Src/fpu.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/fpu.o"
+arm-none-eabi-gcc -o "1_system_drivers-fpu.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Gaming Laptop RTX\Documents\EmbeddedDisplayDriversCourse\1_system_drivers-fpu\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1_system_drivers-fpu.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 1_system_drivers-fpu.elf
+ 
+arm-none-eabi-size   1_system_drivers-fpu.elf 
+arm-none-eabi-objdump -h -S  1_system_drivers-fpu.elf  > "1_system_drivers-fpu.list"
+arm-none-eabi-objcopy  -O binary  1_system_drivers-fpu.elf  "1_system_drivers-fpu.bin"
+   text	   data	    bss	    dec	    hex	filename
+    748	      8	   1568	   2324	    914	1_system_drivers-fpu.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1_system_drivers-fpu.bin
+ 
+Finished building: 1_system_drivers-fpu.list
+ 
+
+11:14:06 Build Finished. 0 errors, 0 warnings. (took 1s.247ms)
+

@@ -1,0 +1,55 @@
+Src/main.o: ../Src/main.c \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/core_cm4.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/cmsis_version.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/cmsis_compiler.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/cmsis_gcc.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/mpu_armv7.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/fpu.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/uart.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/timebase.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/bsp.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/adc.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/spi.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/timebase.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/ssd1306.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/i2c.h \
+ C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/horse_anim.h
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/core_cm4.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/cmsis_version.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/cmsis_compiler.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/cmsis_gcc.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Include/mpu_armv7.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/chip_headers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/fpu.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/uart.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/timebase.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/bsp.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/adc.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/spi.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/timebase.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/ssd1306.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/i2c.h:
+
+C:/Users/Gaming\ Laptop\ RTX/Documents/EmbeddedDisplayDriversCourse/13_SSD1306-OLED/Inc/horse_anim.h:

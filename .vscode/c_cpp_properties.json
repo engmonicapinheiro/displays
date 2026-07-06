@@ -1,0 +1,44 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/EmbeddedExpertsIO/Displays/include",
+                "C:/EmbeddedExpertsIO/Displays/src",
+                "C:/Users/owner/.platformio/packages/framework-cmsis/CMSIS/Include",
+                "C:/Users/owner/.platformio/packages/framework-cmsis-stm32f4/Include",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/EmbeddedExpertsIO/Displays/include",
+                    "C:/EmbeddedExpertsIO/Displays/src",
+                    "C:/Users/owner/.platformio/packages/framework-cmsis/CMSIS/Include",
+                    "C:/Users/owner/.platformio/packages/framework-cmsis-stm32f4/Include",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60119",
+                "STM32F4",
+                "STM32F407xx",
+                "STM32F40_41xxx",
+                "F_CPU=168000000L",
+                ""
+            ],
+            "compilerPath": "C:/Users/owner/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mthumb",
+                "-mcpu=cortex-m4",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

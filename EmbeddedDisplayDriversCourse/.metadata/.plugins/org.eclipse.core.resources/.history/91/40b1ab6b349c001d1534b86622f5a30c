@@ -1,0 +1,123 @@
+#include "st7735.h"
+#include "timebase.h"
+
+
+/*STM32F4			ST7735
+ * PA5(SCK)	  :     SCK
+ * PA7(MOSI)  :     SDA
+ * PB5		  :     RS(RES)
+ * PB4		  :     DC
+ * PB3		  :     CS 		*/
+
+
+
+#define GPIOBEN			(1U<<1)
+
+SPI_HandleTypeDef hspi1;
+
+
+
+void standard_init_cmds(void)
+{
+	/*Set CS low*/
+	ST7735_CS0;
+
+	/*Set RES low*/
+	ST7735_RES0;
+
+	/*delay a bit*/
+	delay(10);
+
+	/*Set RES high*/
+	ST7735_RES1;
+
+	/*Set Sleep Out and Booster*/
+	st7735_write_cmd(0x11);
+
+	/*delay a bit*/
+	delay(120);
+
+	/*Select color mode*/
+	st7735_write_cmd(0x3A);
+
+    /*Set color mode 16 bits*/
+	st7735_write_data(5);
+
+	/*Select memory ccess mode*/
+	st7735_write_cmd(0x36);
+
+	/*Set  horizontal refresh right to left and row address order*/
+	st7735_write_data(0x14);
+
+	/*Display on*/
+	st7735_write_cmd(0x29);
+}
+void st7735_gpio_init(void)
+{
+	/*Enable clock access to GPIO*/
+	RCC->AHB1ENR |=GPIOBEN;
+
+	/*Set PB3,PB4 and PB5 as output pins*/
+
+	GPIOB->MODER |=(1U<<6);
+	GPIOB->MODER &=~(1U<<7);
+
+	GPIOB->MODER |=(1U<<8);
+	GPIOB->MODER &=~(1U<<9);
+
+	GPIOB->MODER |=(1U<<10);
+	GPIOB->MODER &=~(1U<<11);
+}
+
+void st7735_spi_init(void)
+{
+	/*Initialize st7735 gpio*/
+	st7735_gpio_init();
+
+	/*Set spi configuration parameters*/
+	hspi1.Instance = SPI1;
+	hspi1.Init.Mode = SPI_MODE_MASTER;
+	hspi1.Init.Direction =  SPI_DIRECTION_1LINE;
+	hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+	hspi1.Init.CLKPolarity =  SPI_POLARITY_LOW;
+	hspi1.Init.CLKPhase =  SPI_PHASE_1EDGE;
+	hspi1.Init.NSS =  SPI_NSS_SOFT;
+	hspi1.Init.BuadRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+	hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+	hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+
+
+	/*Initialize spi*/
+	spi_init(&hspi1);
+
+}
+
+static void st7735_send_data(unsigned char data)
+{
+	spi_transmit(&hspi1, &data,1,1);
+}
+
+static void st7735_write_cmd(uint8_t cmd)
+{
+	/*Set DC low*/
+	ST7735_CS0;
+
+	/*Send command*/
+	st7735_send_data(cmd);
+}
+
+static void st7735_write_data(uint8_t data)
+{
+	/*Set DC high*/
+	ST7735_CS1;
+
+	/*Send data*/
+	st7735_send_data(data);
+}
+
+static void st7735_push_color(uint16_t color)
+{
+	/*High and Low bytes of color separately*/
+	write_data((uint8_t)(color >> 8));
+	write_data((uint8_t)color);
+}

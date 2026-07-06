@@ -1,0 +1,2 @@
+seven_seg.c:33:6:display_digit	16	static
+seven_seg.c:42:6:seven_seg_init	4	static

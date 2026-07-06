@@ -1,0 +1,8 @@
+#ifndef __CHAR_LCD_H__
+#define __CHAR_LCD_H__
+
+
+#include "stm32f4xx.h"
+#include <stdint.h>
+
+#endif

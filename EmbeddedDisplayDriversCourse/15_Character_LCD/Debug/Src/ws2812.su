@@ -1,0 +1,6 @@
+core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
+ws2812.c:26:6:ws2812_init	8	static
+ws2812.c:83:6:ws2812_set_led	24	static
+ws2812.c:94:6:ws2812_set_brightness	40	static
+ws2812.c:117:6:ws2812_display	32	static
+ws2812.c:169:6:DMA2_Stream1_IRQHandler	4	static

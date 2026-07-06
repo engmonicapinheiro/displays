@@ -1,0 +1,4 @@
+main.c:23:5:main	8	static
+main.c:58:13:draw_sensor_grph_axs	32	static
+main.c:63:13:draw_sys_info_bar	8	static
+main.c:73:13:plot_sensor_data	8	static

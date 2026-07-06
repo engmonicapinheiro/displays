@@ -1,0 +1,46 @@
+#include "char_lcd.h"
+
+/*VSS		GND
+ *VDD		+5V
+ *A			+5V
+ *V0		Potentiometer
+ *K			GND
+ *
+ *RS		PB5
+ *RW        GND
+ *E			PB7
+ *
+ *D4 		PC4
+ *D5		PC5
+ *D6		PC6
+ *D7		PC7
+ * */
+
+#define RS		(1U<<5)
+#define EN		(1U<<7)
+
+
+#define GPIOBEN		(1U<<1)
+#define GPIOCEN		(1U<<2)
+
+
+void lcd_gpio_init(void)
+{
+	/*Enable Clock Access to GPIOB and GPIOC*/
+	RCC->AHB1ENR |= GPIOBEN |GPIOCEN;
+
+	/*Set PB7 and PB5 as output pins*/
+	GPIOB->MODER |=(1U<<14);
+	GPIOB->MODER |=(1U<<10);
+
+	/*Set PC4-PC7 as output pins*/
+	GPIOC->MODER |=(1U<<8);
+	GPIOC->MODER |=(1U<<10);
+	GPIOC->MODER |=(1U<<12);
+	GPIOC->MODER |=(1U<<14);
+
+
+}
+
+
+//static void lcd_nibble_write()
