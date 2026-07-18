@@ -13,7 +13,7 @@
 #include "sevenSeg.h"
 #include "oledDisplaySSD1306.h"
 #include "adxl345.h"
-
+#include "lcd.h"
 
 /* Modules to be developed
  * FPU -- ok
@@ -37,47 +37,26 @@ int main()
   //  LedsInit();
    // Timer1HzInterruptInit();
    // AdcInit();
-    //ButtonInit();
-   // SevenSegInit();  //initialise the 7/8 segment display
    // AdcStartConversion();
     //Timer2OutputCompare();
     //Timer3InputCapture();
    // Pc13ExtiInit();
 
-    /*init oled */
-    ssd1306Init();
-
-    /* set XY */
-    ssd1306GoToXY(0,0);
-
-    /* write string */
-    ssd1306PutString("Remote", 1);
-
-    /* set XY */
-    ssd1306GoToXY(0,8);
-
-    /* write string */
-    ssd1306PutString("Dashboard", 1);
-
-    /* set XY */
-    ssd1306GoToXY(0,30);
-
-    /* write string */
-    ssd1306PutString("For M2M", 1);
-
-
-    /* set XY */
-    ssd1306GoToXY(0,50);
-
-    /* write string */
-    ssd1306PutString("Communication", 1);
-
-    ssd1306UpdateScreen();
-
-    delay(2000);
+   /* initialise LCD */
+    LcdGpioInit();
+    LcdInit();
 
 
     printf("Hello from STM32F4.....\n\r");
+
+    LcdSetCursorPosition(0,LCD_LINE1);
+
+    LcdWrite("Embedded Experts IO");
+
+    LcdSetCursorPosition(0,LCD_LINE2);
+
+    LcdWrite("Sensor = ");
+
 
 
     while (1)

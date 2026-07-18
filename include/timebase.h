@@ -9,8 +9,7 @@
 #define TICK_FREQUENCY      1
 #define MAX_DELAY           0xFFFFFFFF
 
-volatile uint32_t g_currentTick;
-volatile uint32_t g_currentTick_previous;
+
 
 void TimebaseInit(void);
 void TimebaseMsInit(void);

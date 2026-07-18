@@ -1,6 +1,9 @@
 #include "timebase.h"
 #include "stm32f407xx.h"
 
+volatile uint32_t g_currentTick;
+volatile uint32_t g_currentTick_previous;
+
 /* generates an interrupt every second */
 void TimebaseInit(void)
 {
@@ -63,13 +66,19 @@ void delay(uint32_t delay)
 }
 
 
-
+/*
 uint32_t GetTick(void)
 {
     __disable_irq();
     g_currentTick_previous = g_currentTick;
     __enable_irq();
     return g_currentTick_previous;
+}
+*/
+
+uint32_t GetTick(void)
+{
+    return g_currentTick;
 }
 
 void TickIncrement(void)
